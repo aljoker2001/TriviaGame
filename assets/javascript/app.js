@@ -14,22 +14,22 @@ var questions = [
 ];
 var askedQuestions = [];
 var timerID;
-var position = Math.floor(Math.random() * questions.length);
-var question = questions[position].question;
+var position;
+var question;
 var correct = 0;
 var incorrect = 0;
 var tp = document.createElement("h3");
 var options = [];
-var rightWrong = document.querySelector("#rightWrong");
+var rightWrong;
 var answers;
 var reset;
-var playAgain = document.createElement("h3");
-playAgain.setAttribute("id", "playAgain");
-playAgain.textContent = "Would you like to play again?"
+var playAgain;
 
 // Starts game with first question and timer upon pressing the "Start" button.
 var startGame = () => {
-    askedQuestions = [];
+    position = Math.floor(Math.random() * questions.length);
+    question = questions[position].question;
+    askedQuestions.push(question);
     tp.setAttribute("id", "timer");
     tp.textContent = `Time Remaining: ${timer}`;
     triviaField.classList.add("triviaField");
@@ -46,11 +46,15 @@ var startGame = () => {
 // Creates and posts a new question
 var newQuestion = () => {
     console.log(timerID);
+    clearInterval(timerID);
     clear();
-    if (askedQuestions.length === 6) {
+    if (askedQuestions.length === questions.length) {
+        playAgain = document.createElement("h3");
+        playAgain.setAttribute("id", "playAgain");
+        playAgain.textContent = "Would you like to play again?"
         triviaField.appendChild(playAgain);
         reset = document.getElementById("playAgain");
-        reset.addEventListener("click", startGame);
+        reset.addEventListener("click", startOver);
         return;
     }
     position = Math.floor(Math.random() * questions.length);
@@ -59,8 +63,8 @@ var newQuestion = () => {
         timer = 30;
         askedQuestions.push(question);
         qp.textContent = question;
-        timerID = setInterval(count, 1000);
         getAnswers();
+        timerID = setInterval(count, 1000);
         console.log(question);
     } else {
         newQuestion();
@@ -91,20 +95,31 @@ var getAnswers = () => {
 
 // Once all questions have been asked, this resets the game if they would like to play again
 var startOver = () => {
-
+    wrapper.removeChild(playAgain);
+    askedQuestions = [];
+    startGame();
 }
 
 // Displays "wrong answer" text then goes to next question after 5 seconds
 var wrongAnswer = () => {
+    clearInterval(timerID);
+    rightWrong = document.createElement("h2");
+    rightWrong.setAttribute("id", "rightWrong");
     rightWrong.textContent = `The correct answer is ${options[3]}.`;
+    triviaField.appendChild(rightWrong);
     incorrect++;
+    clearInterval(timerID);
     setTimeout(newQuestion, 5000);
 }
 
 // Checks to see if the selection is the correct answer
 var isAnswer = function () {
     if (this.textContent === questions[position].answers[3]) {
+        clearInterval(timerID);
         rightWrong.textContent = "That is correct!";
+        triviaField.appendChild(rightWrong);
+        correct++;
+        setTimeout(newQuestion, 5000);
     } else {
         wrongAnswer();
     }
@@ -116,12 +131,18 @@ var clear = () => {
     options = [];
     clearInterval(timerID);
     answers = document.getElementsByClassName("answers");
-    for (i = 0; i < answers.length; i++) {
-        triviaField.removeChild(answers[i]);
+    for (i = 0; i < 4; i++) {
+        var b = answers.length - 1;
+        triviaField.removeChild(answers[b]);
     }
+    triviaField.removeChild(rightWrong);
 }
 
 start.addEventListener("click", startGame);
-options.forEach(function (elem) {
-    elem.addEventListener("click", isAnswer);
-});
+for (j = 0; j < options.length; j++) {
+    j.addEventListener("click", isAnswer);
+}
+
+// options.forEach(function (elem) {
+//     elem.addEventListener("click", isAnswer);
+// });

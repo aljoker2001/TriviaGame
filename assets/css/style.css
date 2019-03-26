@@ -22,6 +22,7 @@ h2, h3 {
     width: 80%;
     font-family: 'Harry P';
     color: gold;
+    text-align: center;
 }
 
 .wrapper {
@@ -89,4 +90,8 @@ h2, h3 {
     background-color: black;
     color: gold;
     border: 1px solid gold;
+}
+
+#playAgain {
+    text-align: center;
 }
