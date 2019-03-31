@@ -65,6 +65,10 @@ h2, h3 {
     cursor: pointer;
 }
 
+.totals {
+    width: 100%;
+}
+
 #timer {
     width: 100%;
     text-align: center;
@@ -94,4 +98,22 @@ h2, h3 {
 
 #playAgain {
     text-align: center;
+    border: solid 1px gold;
+    width: auto;
+    padding: 5px;
+    margin-bottom: 10px;
+    align-self: center;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 980px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 640px) {
+
 }
