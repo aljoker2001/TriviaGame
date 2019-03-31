@@ -10,8 +10,8 @@ var questions = [
     { question: "Who is Harry's giant friend?", answers: ["Firenze", "Buckbeak", "Scabbers", "Hagrid"] },
     { question: "What is the mascot of Slytherin House?", answers: ["Griffin", "Raven", "Badger", "Snake"] },
     { question: "When was Harry Potter born?", answers: ["October 31, 1980", "August 31, 1980", "May 31, 1980", "July 31, 1980"] },
-    { question: "What wasn't a task in the Tri-Wizard tournament?", answers: ["Fight a dragon", "Find a friend in the Black lake", "Hedge Maze", "Win at Wizard's Chess"] },
-    { question: "What is Harry Potter's patronus charm?", answers: ["Hare", "Penguin", "Otter", "Stag"] },
+    { question: "What wasn't a task in the Tri-Wizard tournament?", answers: ["Fight a dragon", "Find a friend in the Black Lake", "Hedge Maze", "Win at Wizard's Chess"] },
+    { question: "What is Harry Potter's Patronus charm?", answers: ["Hare", "Penguin", "Otter", "Stag"] },
     { question: "Who did not teach Defense against the Dark Arts?", answers: ["Severus Snape", "Albus Dumbledore", "Remus Lupin", "Alastor Moody"] },
     { question: "Who of the following is not an Animagus?", answers: ["Minerva McGonagall", "Sirius Black", "Peter Pettigrew", "Sybill Trelawney"]},
     { question: "What was the name of Albus Dumbledore's sister?", answers: ["Aliana", "Athiana", "Astrina", "Ariana"]}
@@ -148,9 +148,15 @@ var wrongAnswer = () => {
     rightWrong.setAttribute("id", "rightWrong");
     rightWrong.textContent = `The correct answer is ${options[3]}.`;
     triviaField.appendChild(rightWrong);
+    triviaField.style.backgroundColor = "red";
     incorrect++;
+    setTimeout(backgroundBlack, 1000);
     clearInterval(timerID);
     setTimeout(newQuestion, 3000);
+}
+
+var backgroundBlack = () => {
+    triviaField.style.backgroundColor = "black";
 }
 
 // Checks to see if the selection is the correct answer
@@ -160,6 +166,8 @@ var isAnswer = function () {
         rightWrong = document.createElement("h2");
         rightWrong.setAttribute("id", "rightWrong");
         rightWrong.textContent = "That is correct!";
+        triviaField.style.backgroundColor = "blue";
+        setTimeout(backgroundBlack, 1000);
         triviaField.appendChild(rightWrong);
         correct++;
         clearInterval(timerID);

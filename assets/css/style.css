@@ -41,6 +41,7 @@ h2, h3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    transition: all .05s;
 }
 
 .questionPara {
