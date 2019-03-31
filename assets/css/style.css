@@ -107,13 +107,8 @@ h2, h3 {
 }
 
 @media screen and (max-width: 980px) {
-
-}
-
-@media screen and (max-width: 768px) {
-
-}
-
-@media screen and (max-width: 640px) {
-
+    .answers {
+        border: 1px solid gold;
+        padding: 10px;
+    }
 }
