@@ -113,3 +113,27 @@ h2, h3 {
         padding: 10px;
     }
 }
+
+@media screen and (max-width: 768px) {
+    
+}
+
+@media screen and (max-width: 640px) {
+    h1 {
+        font-size: 80px;
+    }
+    
+    #timer {
+        font-size: 25px;
+    }
+
+    .questionPara {
+        font-size: 40px;
+    }
+
+    .answers {
+        font-size: 20px;
+        width: 20%;
+        height: auto;
+    }
+}
